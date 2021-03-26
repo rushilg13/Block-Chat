@@ -18,7 +18,7 @@ now = now.strftime("%H:%M:%S")
 today = date.today()
 today =  today.strftime("%d/%m/%Y") 
 time_stamp = (today + " " +now)
-genesis_block = Block(0, hashlib.sha256("Block-Chat".encode()).hexdigest(), time_stamp, "Secure Chat Application is Live!")
+genesis_block = Block(0, hashlib.sha256("Block-Chat".encode()).hexdigest(), time_stamp, "Secure Chat Application for Server is Live!")
 # print(genesis_block.message)
 
 s = socket.socket()
