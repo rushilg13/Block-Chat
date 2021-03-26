@@ -52,7 +52,7 @@ while 1:
     blockchain_b.tobytes()
     conn.send(blockchain_b)
     conn.send(message)
-    blockchain_b = conn.recv(20480)
+    blockchain_b = conn.recv(20480000)
     blockchain = list(bytes(blockchain_b))
     incoming_msg = conn.recv(1024).decode()
     print("Client:", incoming_msg)

@@ -29,7 +29,7 @@ print("Connected to Server")
 blocknumber = 1
 prev_hash = genesis_block.block_hash
 while 1:
-    blockchain_b = s.recv(20480)
+    blockchain_b = s.recv(20480000)
     blockchain = list(bytes(blockchain_b))
     incoming_msg = s.recv(5096).decode()
     print("Server:", incoming_msg)
