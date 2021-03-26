@@ -3,6 +3,7 @@ import sys
 import time
 from datetime import datetime, date
 import hashlib
+import numpy as np
 
 class Block:
     def __init__(self, blocknumber, prev_hash, time_stamp, message):
@@ -28,7 +29,9 @@ print("Connected to Server")
 blocknumber = 1
 prev_hash = genesis_block.block_hash
 while 1:
-    incoming_msg = s.recv(1024).decode()
+    blockchain_b = s.recv(20480)
+    blockchain = list(bytes(blockchain_b))
+    incoming_msg = s.recv(5096).decode()
     print("Server:", incoming_msg)
     msg = input("Client: ").encode()
     now = datetime.now()
@@ -37,7 +40,10 @@ while 1:
     today =  today.strftime("%d/%m/%Y")   # Current date
     time_stamp = (today + " " +now)
     new_block = Block(blocknumber, prev_hash, time_stamp, msg.decode("utf-8"))
+    blockchain.append(new_block)
+    blockchain_b = np.array(blockchain)
+    blockchain_b.tobytes()
     blocknumber+=1
     prev_hash = new_block.block_hash
-    print(new_block.blocknumber, new_block.prev_hash, new_block.time_stamp, new_block.message, new_block.block_hash)
+    s.send(blockchain_b)
     s.send(msg)
