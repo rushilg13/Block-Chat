@@ -3,6 +3,7 @@ import sys
 import time
 from datetime import datetime, date
 import hashlib
+import numpy as np
 
 class Block:
     def __init__(self, blocknumber, prev_hash, time_stamp, message):
@@ -13,12 +14,14 @@ class Block:
         hash = str(blocknumber) + message + prev_hash + time_stamp
         self.block_hash = hashlib.sha256(hash.encode()).hexdigest()
 
+blockchain = []
 now = datetime.now()
 now = now.strftime("%H:%M:%S") 
 today = date.today()
 today =  today.strftime("%d/%m/%Y") 
 time_stamp = (today + " " +now)
 genesis_block = Block(0, hashlib.sha256("Block-Chat".encode()).hexdigest(), time_stamp, "Secure Chat Application for Server is Live!")
+blockchain.append(genesis_block)
 # print(genesis_block.message)
 
 s = socket.socket()
@@ -43,6 +46,9 @@ while 1:
     blocknumber+=1
     prev_hash = new_block.block_hash
     print(new_block.blocknumber, new_block.prev_hash, new_block.time_stamp, new_block.message, new_block.block_hash)
+    blockchain.append(new_block)
+    a = np.array(blockchain)
+    a.tobytes()
     conn.send(message)
     incoming_msg = conn.recv(1024).decode()
     print("Client:", incoming_msg)
