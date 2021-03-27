@@ -11,3 +11,7 @@ open another terminal in same folder <br>
 python client.py <br>
 enter hostname from server terminal to client terminal <br>
 Chat! <br>
+
+# To run chat app for 2 more users simultaneously
+Change port number in both server.py and client.py <br>
+Run whole thing again <br>
