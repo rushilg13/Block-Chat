@@ -6,6 +6,7 @@ A Blockchain implemented Chatting Program
 clone repo <br>
 open terminal <br>
 cd to folder <br>
+pip install -r requirements.txt <br>
 python server.py <br>
 open another terminal in same folder <br>
 python client.py <br>
